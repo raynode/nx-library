@@ -9,7 +9,7 @@ module.exports = {
     "node": false,        // Node.js global variables and Node.js-specific rules.
     "worker": false,      // web workers global variables.
     "amd": false,         // defines require() and define() as global variables as per the amd spec.
-    "mocha": false,       // adds all of the Mocha testing global variables.
+    "mocha": true,       // adds all of the Mocha testing global variables.
     "jasmine": false,     // adds all of the Jasmine testing global variables for version 1.3 and 2.0.
     "phantomjs": false,   // phantomjs global variables.
     "jquery": false,      // jquery global variables.
@@ -22,8 +22,6 @@ module.exports = {
   },
 
   "globals": {
-    "describe": true,
-    "it": true,
     "module": true
   },
 
@@ -39,7 +37,7 @@ module.exports = {
 
 
     // Best Practices
-    "curly": 2,                 // specify curly brace conventions for all control statements
+    curly: ["error", "multi-or-nest"],
     "no-eval": 2,               // disallow use of eval()
     "no-extend-native": 2,      // disallow adding to native types
     "no-new-wrappers": 2,       // disallows creating new instances of String, Number, and Boolean
@@ -69,9 +67,5 @@ module.exports = {
 
 
     // ECMAScript 6
-
-
-    // Legacy
-    "max-len": [1, 80, 2] // specify the maximum length of a line in your program (off by default)
   }
 }
