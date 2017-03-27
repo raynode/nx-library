@@ -9,15 +9,15 @@ import { uuid, resolveId } from './utils'
 export const initialState = {}
 
 const reducer = {
-  [ACCOUNTS_CREATE] : (state, { id, created_at, name, value }) => Object.assign({}, state, ({
+  [ACCOUNTS_CREATE] : (state, { id, created_at, name, balance }) => Object.assign({}, state, ({
     [id] : {
-      id, created_at, name, value
+      id, created_at, name, balance
     }
   })),
 
-  [ACCOUNTS_UPDATE] : (state, { id, updated_at, value }) => Object.assign({}, state, ({
+  [ACCOUNTS_UPDATE] : (state, { id, updated_at, balance }) => Object.assign({}, state, ({
     [id] : Object.assign({}, state[id], {
-      updated_at, value
+      updated_at, balance
     })
   })),
 
@@ -28,18 +28,18 @@ const reducer = {
   }
 }
 
-export const createAccounts = (name, value) => ({
+export const createAccounts = (name, balance) => ({
   type       : ACCOUNTS_CREATE,
   id         : uuid(),
   created_at : new Date(),
   name,
-  value,
+  balance,
 })
 
-export const updateAccounts = (idOrName, value) => (dispatch, getState) => dispatch({
+export const updateAccounts = (idOrName, balance) => (dispatch, getState) => dispatch({
   type : ACCOUNTS_UPDATE,
   id   : resolveId(idOrName, getState()),
-  value,
+  balance,
 })
 
 export const deleteAccounts = idOrName => (dispatch, getState) => dispatch({
@@ -47,11 +47,10 @@ export const deleteAccounts = idOrName => (dispatch, getState) => dispatch({
   id   : resolveId(idOrName, getState()),
 })
 
-export default (state = {}, action = {}) => {
-  const { accounts = initialState } = state
+export default (state = initialState, action = {}) => {
   const { type } = action
   return reducer[type] ?
-    reducer[type](accounts, action) :
+    reducer[type](state, action) :
     state
 }
 
