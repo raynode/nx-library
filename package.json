@@ -2,12 +2,14 @@
   "name": "nox-library",
   "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "mocha --require babel-polyfill --compilers js:babel-register src/**/*.spec.js",
     "tdd": "mocha -w --require babel-polyfill --compilers js:babel-register src/**/*.spec.js",
     "lint": "esw -w src",
-    "start": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\""
+    "start": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
+    "build": "babel src --presets es2015,stage-0 --out-dir dist",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -17,27 +19,28 @@
   "author": "Tobias Kopelke <nox@raynode.de>",
   "license": "private",
   "dependencies": {
-    "babel-polyfill": "^6.23.0",
-    "debug": "^2.6.1",
-    "mongoose": "^4.8.6",
-    "request": "^2.80.0"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.0",
+    "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.24.0",
     "chai": "^3.5.0",
+    "debug": "^2.6.1",
     "eslint": "^3.1.1",
     "eslint-config-google": "^0.7.1",
     "faker": "^4.1.0",
     "isparta": "^4.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "mongoose": "^4.8.6",
     "nodemon": "^1.9.2",
+    "react": "^15.4.2",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "request": "^2.80.0",
     "unexpected": "^10.26.3"
   }
 }
